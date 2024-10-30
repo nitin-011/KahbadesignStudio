@@ -12,7 +12,7 @@ backend/frontend/.env
 /coverage
 
 # production
-/build
+backend/fontend/build
 
 # misc
 .DS_Store
