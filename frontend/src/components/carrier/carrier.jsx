@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './carrier.css';
+import { configDotenv } from 'dotenv';
+
+configDotenv({ path: '../../../../config/config.env' });
 
 const CarrierUs = () => {
   const [formData, setFormData] = useState({
@@ -34,9 +37,8 @@ const CarrierUs = () => {
     data.append('resume', formData.resume);
     console.log('Submitting data:', data);
 
-
     try {
-      await axios.post('http://localhost:5000/api/carrier', data, {
+      await axios.post(process.env.CARRIER_URL, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -50,46 +52,45 @@ const CarrierUs = () => {
   return (
     <div className="contact-us-page">
       {/* Header */}
-
+      
       {/* Contact Form Section */}
       <div className="form-section">
         <h2>WANT TO WORK WITH US</h2>
         <form className="contact-form" onSubmit={handleSubmit}>
-          <input 
-            type="text" 
-            name="name" 
-            placeholder="Name" 
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
             value={formData.name}
             onChange={handleChange}
-            required 
+            required
           />
-          <input 
-            type="tel" 
-            name="phone" 
+          <input
+            type="tel"
+            name="phone"
             placeholder="Phone number"
             value={formData.phone}
             onChange={handleChange}
-            required 
+            required
           />
-          <input 
-            type="email" 
-            name="email" 
-            placeholder="Email id" 
+          <input
+            type="email"
+            name="email"
+            placeholder="Email id"
             value={formData.email}
             onChange={handleChange}
-            required 
+            required
           />
-          <input 
-            type="file" 
-            name="resume" 
-            accept=".pdf,.doc,.docx" 
+          <input
+            type="file"
+            name="resume"
+            accept=".pdf,.doc,.docx"
             onChange={handleFileChange}
-            required 
+            required
           />
           <button type="submit" className="upload-button">UPLOAD YOUR RESUME</button>
         </form>
       </div>
-
     </div>
   );
 };
