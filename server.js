@@ -19,10 +19,10 @@ app.use(cors());
 app.use(express.json());
 
 // Static folder
-app.use(express.static(path.join(__dirname, '/client/build')));
+app.use(express.static(path.join(__dirname, '/frontend/build')));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/client/build/index.html'));
+    res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
 });
 // Database Connection
 mongoose.connect(process.env.MONGODB_URI, {
